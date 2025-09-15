@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>KookGuide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+    <div id="app">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1>KookGuide</h1>
+                <button id="newRecipeBtn" class="primary">+ New Recipe</button>
+            </div>
+            <div id="historyList" class="history-list" aria-label="Recipe history"></div>
+        </aside>
+        <main class="main">
+            <div id="recipeHeader" class="recipe-header">
+                <input id="recipeTitle" class="title-input" placeholder="Untitled Recipe" disabled/>
+                <div class="actions">
+                    <!-- <button id="saveBtn" class="secondary" disabled>Save</button> -->
+                    <button id="deleteBtn" class="danger" disabled>Delete</button>
+                </div>
+            </div>
+            <section id="recipeContent" class="recipe-content" aria-live="polite">
+                <div class="empty-state">
+                    <h2>Welcome to KookGuide</h2>
+                    <p>Create a recipe or select one from the history.</p>
+                </div>
+            </section>
+            <div class="chat-input">
+                <div class="input-wrapper">
+                    <textarea id="promptInput" rows="1" placeholder="Describe the recipe you want... e.g., \"Spicy Thai basil chicken for 2\""></textarea>
+                    <button id="createBtn" class="primary">Create</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <template id="historyItemTemplate">
+        <button class="history-item">
+            <div class="item-title"></div>
+            <div class="item-meta"></div>
+        </button>
+    </template>
+
+    <script>window.BACKEND_BASE_URL = 'http://localhost:3001';</script>
+    <script src="/script.js" defer></script>
+</body>
+<!--
+Structure:
+ - Sidebar: recipe history from GET /recipes
+ - Main: selected recipe content (messages string) with title editing
+ - Chat input: send prompt to POST /recipes
+Accessibility: buttons, aria-live for updates
+-->
+</html>
+
+
