@@ -62,7 +62,7 @@ export const deleteRecipe = async (req, res) => {
 const ai = async (prompt) => {
     try {
 
-const system_prompt = ``
+const system_prompt = `You are a chef name KookGuide that will help pople with their meal by helping them generate the recipe by their prompting.By having a clear ingredients and instruction.the way you respons should not have any Markdown lanmarkdown language.Lastly you dont have to answer too long`
   const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
     method: "POST",
     headers: {
@@ -70,7 +70,7 @@ const system_prompt = ``
       "Content-Type": "application/json"
     },
     body: JSON.stringify({
-      model: "openai/gpt-oss-120b",
+      model: "openai/gpt-oss-20b",
       messages: [
         {
             role: "system",
@@ -85,6 +85,7 @@ const system_prompt = ``
   });
 
   const data = await response.json();
+  console.log(data);
     return data.choices[0].message.content
 }  catch(err) {
     console.log(err)
