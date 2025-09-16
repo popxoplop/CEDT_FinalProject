@@ -15,7 +15,7 @@
         <aside class="sidebar">
             <div class="sidebar-header">
                 <h1 id="kookguide">KookGuide</h1>
-                <button id="newRecipeBtn" class="primary">+ New Recipe</button>
+                <h1 id="newRecipeBtn" class="primary"></h1>
             </div>
             <div id="historyList" class="history-list" aria-label="Recipe history"></div>
         </aside>
@@ -23,7 +23,8 @@
             <div id="recipeHeader" class="recipe-header">
                 <input id="recipeTitle" class="title-input" placeholder="Untitled Recipe" disabled/>
                 <div class="actions">
-                    <button id="saveBtn" class="secondary" disabled>Save</button>
+                    <button id="createBtn" class="primary">Create</button>
+                    <!-- <button id="saveBtn" class="secondary" disabled>Save</button> -->
                     <button id="deleteBtn" class="danger" disabled>Delete</button>
                 </div>
             </div>
@@ -36,7 +37,8 @@
             <div class="chat-input">
                 <div class="input-wrapper">
                     <textarea id="promptInput" rows="1" placeholder="Describe the recipe you want... e.g., \"Spicy Thai basil chicken for 2\""></textarea>
-                    <button id="createBtn" class="primary">Create</button>
+                    <!-- <button id="createBtn" class="primary">Create</button> -->
+                    <button id="saveBtn" class="secondary" disabled>Update</button>
                 </div>
             </div>
         </main>

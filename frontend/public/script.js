@@ -1,5 +1,5 @@
 (() => {
-  const BASE_URL = window.BACKEND_BASE_URL || 'http://localhost:3001';
+  const BASE_URL = 'http://54.90.148.56:3222';
 
   /** DOM Elements **/
   const historyList = document.getElementById('historyList');
@@ -136,10 +136,10 @@
 
   async function handleCreate() {
     const prompt = promptInput.value.trim();
-    if (!prompt) return;
-    console.log(prompt)
-    createBtn.disabled = true;
-    createBtn.textContent = 'Creating…';
+    // if (!prompt) return;
+    // console.log(prompt)
+    // createBtn.disabled = true;
+    // createBtn.textContent = 'Creating…';
     try {
       await apiCreateRecipe(prompt);
       promptInput.value = '';
@@ -156,8 +156,10 @@
     if (!selectedRecipe) return;
     const newTitle = recipeTitleEl.value.trim();
     if (!newTitle) return;
-    const newPrompt = `${newTitle}\n\n${selectedRecipe.messages || ''}`;
+    const newPrompt = `${newTitle}\n\n${promptInput.value.trim()}`;
     saveBtn.disabled = true;
+
+    console.log(newPrompt);
     try {
       await apiUpdateRecipe(selectedRecipe._id, newPrompt);
       await refreshHistory(true);

@@ -28,11 +28,13 @@ export const createRecipe = async (req, res) => {
 
 export const updateRecipe = async (req, res) => {
     try {
+        
         const { id, prompt } = req.body;
         if (!id || !prompt) {
             return res.status(400).json({ message: "id and prompt are required" });
         }
         const ret = await ai(prompt);
+        console.log(prompt);
         const updated = await RecipeModel.findByIdAndUpdate(
             id,
             {
@@ -82,7 +84,7 @@ const system_prompt = `You are a chef name KookGuide that will help pople with t
       "Content-Type": "application/json"
     },
     body: JSON.stringify({
-      model: "openai/gpt-oss-20b",
+      model: "openai/gpt-oss-120b",
       messages: [
         {
             role: "system",
