@@ -8,7 +8,7 @@
   const newRecipeBtn = document.getElementById('newRecipeBtn');
   const createBtn = document.getElementById('createBtn');
   const promptInput = document.getElementById('promptInput');
-  // const saveBtn = document.getElementById('saveBtn');
+  const saveBtn = document.getElementById('saveBtn');
   const deleteBtn = document.getElementById('deleteBtn');
 
   /** State **/
@@ -34,7 +34,7 @@
   }
 
   function setButtonsEnabled(enabled) {
-    // saveBtn.disabled = !enabled;
+    saveBtn.disabled = !enabled;
     deleteBtn.disabled = !enabled;
   }
 
@@ -157,14 +157,14 @@
     const newTitle = recipeTitleEl.value.trim();
     if (!newTitle) return;
     const newPrompt = `${newTitle}\n\n${selectedRecipe.messages || ''}`;
-    // saveBtn.disabled = true;
+    saveBtn.disabled = true;
     try {
       await apiUpdateRecipe(selectedRecipe._id, newPrompt);
       await refreshHistory(true);
     } catch (e) {
       alert(e.message || 'Error saving recipe');
     } finally {
-      // saveBtn.disabled = false;
+      saveBtn.disabled = false;
     }
   }
 
@@ -199,7 +199,7 @@
   /** Wire events **/
   createBtn.addEventListener('click', handleCreate);
   newRecipeBtn.addEventListener('click', () => promptInput.focus());
-  // saveBtn.addEventListener('click', handleSave);
+  saveBtn.addEventListener('click', handleSave);
   deleteBtn.addEventListener('click', handleDelete);
 
   /** Init **/

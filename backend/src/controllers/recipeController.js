@@ -28,17 +28,29 @@ export const createRecipe = async (req, res) => {
 
 export const updateRecipe = async (req, res) => {
     try {
-        const {id, prompt} = req.body;
-        if(!id || !prompt) {
-            return res.status(400).json({message: "id, message, time are required"}) 
+        const { id, prompt } = req.body;
+        if (!id || !prompt) {
+            return res.status(400).json({ message: "id and prompt are required" });
         }
-        const ret = await ai(prompt)
-        await RecipeModel.findByIdAndUpdate(id,{
-            messages: ret,
-        });
-        res.status(200).json({messsage: "OK"});
+        const ret = await ai(prompt);
+        const updated = await RecipeModel.findByIdAndUpdate(
+            id,
+            {
+                messages: ret,
+                time: Date.now()
+            },
+            {
+                new: true,
+                runValidators: true,
+                upsert: false
+            }
+        );
+        if (!updated) {
+            return res.status(404).json({ message: "Recipe not found" });
+        }
+        res.status(200).json(updated);
     } catch (err) {
-        console.log("HE ")
+        console.log(err);
         res.status(500).json({ error: err.message });
     }
 };
